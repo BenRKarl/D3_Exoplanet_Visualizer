@@ -11,7 +11,7 @@ function buildSvg(data){
     return year
   });
 
-  window.xAxisScale = d3.scale.linear().domain([oldestPlanet, newestPlanet]).range([width, 0]);
+  window.xAxisScale = d3.scale.linear().domain([newestPlanet, oldestPlanet]).range([width, 0]);
   window.yAxisScale = d3.scale.linear().domain([0, 150]).range([height, 0]);
 
   window.svg = d3.select('body')
@@ -30,7 +30,7 @@ function buildSvg(data){
 
   var yAxis = d3.svg.axis()
       .scale(window.yAxisScale)
-      .orient('bottom');
+      .orient('left');
 
   window.svg.append('g')
       .attr('class', 'x-axis')
@@ -40,8 +40,7 @@ function buildSvg(data){
   window.svg.append('g')
       .attr('class', 'y-axis')
       .call(yAxis);
-
-}
+} //End SVG function
 
 function getDiscYears(array){
   var yearArray = [];
@@ -62,7 +61,7 @@ $(function(){
     success: function(data){
       $('body').empty();
       window.yearArray = getDiscYears(data.response.results);
-      // buildSvg(yearArray);
+      buildSvg(yearArray);
     }
   })
 })
