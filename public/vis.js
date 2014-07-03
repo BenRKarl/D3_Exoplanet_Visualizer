@@ -42,6 +42,25 @@ function buildSvg(data){
       .call(yAxis);
 } //End SVG function
 
+function project(data){
+  var image = svg.selectAll('image').data(data);
+  image.enter()
+    .append('image')
+    .attr('xlink:href', function(d){
+      return 'http://fc00.deviantart.net/fs70/i/2011/140/f/4/desert_planet_resource_by_ziliran-d3gtwm1.png';
+    })
+    .attr('width', 25)
+    .attr('height', 25)
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('opacity', 0)
+    .transition().duration(1000)
+    .attr('x', function(d){
+      return xAxisScale(d);
+    })
+    .attr('opacity', 0.75)
+}
+
 function getDiscYears(array){
   var yearArray = [];
   for (i = 0; i < array.length; i++){
