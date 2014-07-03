@@ -51,13 +51,13 @@ function project(data){
     })
     .attr('width', 25)
     .attr('height', 25)
-    .attr('x', 0)
-    .attr('y', 0)
-    .attr('opacity', 0)
-    .transition().duration(100)
     .attr('x', function(d){
       return xAxisScale(d);
     })
+    .attr('y', 0)
+    .attr('opacity', 0)
+    .transition().duration(1000)
+    .attr('y', 700)
     .attr('opacity', 0.75)
 }
 
@@ -86,7 +86,7 @@ $(function(){
     dataType: 'json',
     success: function(data){
       $('body').empty();
-      window.yearArray = getDiscYears(data.response.results);
+      window.yearArray = (getDiscYears(data.response.results)).sort();
       buildSvg(yearArray);
       window.timer = setInterval(selectData, 100);
     }
