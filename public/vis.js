@@ -54,11 +54,18 @@ function project(data){
     .attr('x', 0)
     .attr('y', 0)
     .attr('opacity', 0)
-    .transition().duration(1000)
+    .transition().duration(100)
     .attr('x', function(d){
       return xAxisScale(d);
     })
     .attr('opacity', 0.75)
+}
+
+var data = [];
+function selectData(){
+  var year = window.yearArray.pop()
+  data.push(year);
+  project(data);
 }
 
 function getDiscYears(array){
@@ -81,6 +88,7 @@ $(function(){
       $('body').empty();
       window.yearArray = getDiscYears(data.response.results);
       buildSvg(yearArray);
+      window.timer = setInterval(selectData, 100);
     }
   })
 })
