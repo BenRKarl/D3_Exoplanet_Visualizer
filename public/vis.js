@@ -12,13 +12,15 @@ function buildSvg(data){
   });
 }
 
-function filterPlanets(array){
+function getDiscYears(array){
+  var yearArray = [];
   for (i = 0; i < array.length; i++){
-    if (array[i].disc_year == "" || array[i].disc_year == undefined){
-      array.splice(i, 1);
+    var year = array[i].disc_year;
+    if(Number.isInteger( year )){
+      yearArray.push( year );
     }
   }
-  return array;
+  return yearArray;
 }
 
 $(function(){
@@ -28,7 +30,7 @@ $(function(){
     dataType: 'json',
     success: function(data){
       $('body').empty();
-      window.planetData = filterPlanets(data.response.results);
+      window.yearArray = getDiscYears(data.response.results);
       // buildSvg(planetData);
     }
   })
